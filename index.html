@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="day">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>成都·九寨沟 五日行程 · 旅行手册</title>
+<style>
+  :root{
+    --day-1:#B5482E; --day-2:#1B6E75; --day-3:#C68A2E; --day-4:#7A4368; --day-5:#3E5C76;
+  }
+  html[data-theme="day"]{
+    --bg:#EDEEE2; --surface:#F7F6EC; --surface-2:#E4E4D4; --ink:#20282A; --ink-soft:#586063;
+    --accent:#1B6E75; --accent-ink:#ffffff; --warn:#B5482E; --warn-bg:#F3E2DB; --line:#C9C7B4;
+    --shadow:0 1px 0 rgba(32,40,42,.08);
+  }
+  html[data-theme="night"]{
+    --bg:#0F1A1C; --surface:#152426; --surface-2:#1B2C2F; --ink:#E7E2D3; --ink-soft:#9FB0AE;
+    --accent:#5FC4BA; --accent-ink:#0F1A1C; --warn:#E08858; --warn-bg:#2A1F1B; --line:#2C3E40;
+    --shadow:0 1px 0 rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    transition:background .6s ease, color .6s ease;
+  }
+  .serif{ font-family:"Noto Serif SC","Source Han Serif SC","Songti SC",serif; }
+  .wrap{ max-width:640px; margin:0 auto; padding:0 20px 64px; }
+  a{ color:inherit; }
+  .muted{ color:var(--ink-soft); }
+
+  header.masthead{ padding:28px 0 18px; }
+  header.masthead .eyebrow{ font-size:13px; color:var(--ink-soft); letter-spacing:.02em; }
+  header.masthead h1{ font-size:26px; margin:6px 0 4px; font-weight:700; }
+  header.masthead .dates{ font-size:14px; color:var(--ink-soft); }
+
+  section{ margin-top:34px; }
+  h2.section-title{ font-size:15px; font-weight:700; margin:0 0 14px; color:var(--ink-soft); letter-spacing:.01em; }
+
+  /* ---- 此刻关注 卡片 ---- */
+  .now-card{
+    background:var(--accent); color:var(--accent-ink); border-radius:18px; padding:22px 22px 20px;
+    box-shadow:var(--shadow);
+  }
+  .now-card .label{ font-size:13px; opacity:.85; }
+  .now-card .event-title{ font-size:19px; font-weight:700; margin:4px 0 14px; }
+  .now-card .countdown{ display:flex; gap:14px; }
+  .now-card .unit{ text-align:center; }
+  .now-card .unit .num{ font-size:34px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1; }
+  .now-card .unit .lab{ font-size:11px; opacity:.8; margin-top:4px; }
+  .now-card .meta{ margin-top:16px; font-size:13px; opacity:.9; }
+  .now-card .meta a{ text-decoration:underline; }
+  .now-card.done{ background:var(--surface-2); color:var(--ink); }
+
+  /* ---- 总览地图 ---- */
+  .map-box{ background:var(--surface); border-radius:18px; padding:16px 8px 6px; box-shadow:var(--shadow); }
+  .map-legend{ display:flex; flex-wrap:wrap; gap:10px 16px; padding:10px 14px 14px; font-size:12px; color:var(--ink-soft); }
+  .map-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .map-legend i{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+  /* ---- 已确认信息 ---- */
+  .card{ background:var(--surface); border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); margin-bottom:12px; }
+  .card .row{ display:flex; justify-content:space-between; gap:10px; font-size:14px; margin:3px 0; }
+  .card .row .k{ color:var(--ink-soft); flex:none; }
+  .card .title-line{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  .card .title-line strong{ font-size:15px; }
+  .pill{ font-size:11px; padding:2px 8px; border-radius:20px; background:var(--warn-bg); color:var(--warn); white-space:nowrap; }
+  .locbtn{ display:inline-flex; align-items:center; gap:4px; font-size:13px; color:var(--accent); text-decoration:none; margin-top:6px; }
+  .locbtn svg{ width:13px; height:13px; }
+  .pending{ font-style:italic; color:var(--ink-soft); font-size:13px; }
+
+  /* ---- 逐日行程 ---- */
+  .day-card{ background:var(--surface); border-radius:16px; margin-bottom:14px; box-shadow:var(--shadow); overflow:hidden; border-left:5px solid var(--dc); }
+  .day-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; cursor:pointer; }
+  .day-head .d-left{ display:flex; align-items:baseline; gap:10px; }
+  .day-head .d-num{ font-size:12px; color:var(--dc); font-weight:700; }
+  .day-head .d-date{ font-size:15px; font-weight:700; }
+  .day-head .d-title{ font-size:13px; color:var(--ink-soft); }
+  .day-head .chev{ transition:transform .25s ease; color:var(--ink-soft); }
+  .day-head.open .chev{ transform:rotate(180deg); }
+  .day-route{ display:none; padding:0 16px 14px; border-top:1px dashed var(--line); }
+  .day-route.open{ display:block; }
+  .day-route .rlist{ font-size:13px; color:var(--ink-soft); margin:10px 0; }
+  .navbtn{ display:inline-block; font-size:13px; background:var(--accent); color:var(--accent-ink); padding:8px 14px; border-radius:20px; text-decoration:none; margin-top:4px; }
+  .events{ padding:2px 16px 14px; }
+  .ev{ display:flex; gap:12px; padding:9px 0; border-top:1px solid var(--line); }
+  .ev:first-child{ border-top:none; }
+  .ev .time{ flex:none; width:52px; font-size:13px; font-weight:700; color:var(--dc); padding-top:1px; }
+  .ev .body{ flex:1; font-size:14px; }
+  .ev .note{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+  .ev .loc{ margin-top:4px; }
+
+  /* ---- 待办 / 贴士 ---- */
+  ul.plain{ list-style:none; margin:0; padding:0; }
+  ul.plain li{ position:relative; padding:10px 0 10px 20px; border-top:1px solid var(--line); font-size:14px; }
+  ul.plain li:first-child{ border-top:none; }
+  ul.plain li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
+  ul.plain li .when{ color:var(--warn); font-weight:700; }
+
+  footer{ margin-top:44px; text-align:center; font-size:12px; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">旅行手册</div>
+    <h1 class="serif">成都 · 九寨沟</h1>
+    <div class="dates">2026年10月2日 – 10月6日 · 2人 · 时间均为北京时间 (UTC+8)</div>
+  </header>
+
+  <section id="now">
+    <div id="nowCard" class="now-card">
+      <div class="label">此刻关注</div>
+      <div class="event-title" id="nowTitle">加载中…</div>
+      <div class="countdown" id="nowCountdown">
+        <div class="unit"><div class="num" id="cd-d">–</div><div class="lab">天</div></div>
+        <div class="unit"><div class="num" id="cd-h">–</div><div class="lab">时</div></div>
+        <div class="unit"><div class="num" id="cd-m">–</div><div class="lab">分</div></div>
+        <div class="unit"><div class="num" id="cd-s">–</div><div class="lab">秒</div></div>
+      </div>
+      <div class="meta" id="nowMeta"></div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <h2 class="section-title">行程总览</h2>
+    <div class="map-box">
+      <svg viewBox="0 0 640 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-label="行程路线示意图（非精确比例）">
+        <path d="M40,240 C110,150 90,90 170,80" fill="none" stroke="var(--day-1)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+        <path d="M170,80 C230,72 250,110 300,120" fill="none" stroke="var(--day-2)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M300,120 C360,132 380,60 430,55" fill="none" stroke="var(--day-2)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M430,55 C470,52 480,80 470,110" fill="none" stroke="var(--day-4)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 9"/>
+        <path d="M470,110 C440,150 380,150 340,175" fill="none" stroke="var(--day-4)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M340,175 C300,196 260,190 230,205" fill="none" stroke="var(--day-4)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M230,205 C180,222 130,205 90,235" fill="none" stroke="var(--day-5)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+
+        <circle cx="40" cy="240" r="7" fill="var(--day-1)"/>
+        <text x="40" y="262" font-size="12" fill="var(--ink-soft)" text-anchor="middle">香港</text>
+
+        <circle cx="170" cy="80" r="8" fill="var(--day-1)"/>
+        <text x="170" y="66" font-size="12" fill="var(--ink)" text-anchor="middle" font-weight="700">成都 · 住1晚</text>
+
+        <circle cx="430" cy="55" r="9" fill="var(--day-2)"/>
+        <text x="430" y="40" font-size="12" fill="var(--ink)" text-anchor="middle" font-weight="700">九寨沟 · 住2晚</text>
+
+        <circle cx="230" cy="205" r="8" fill="var(--day-4)"/>
+        <text x="230" y="225" font-size="12" fill="var(--ink)" text-anchor="middle" font-weight="700">成都 · 住1晚</text>
+
+        <circle cx="90" cy="235" r="7" fill="var(--day-5)"/>
+        <text x="90" y="255" font-size="12" fill="var(--ink-soft)" text-anchor="middle">香港</text>
+      </svg>
+      <div class="map-legend">
+        <span><i style="background:var(--day-1)"></i>10/2 香港→成都</span>
+        <span><i style="background:var(--day-2)"></i>10/3 成都→九寨沟</span>
+        <span><i style="background:var(--day-3)"></i>10/4 九寨沟</span>
+        <span><i style="background:var(--day-4)"></i>10/5 九寨沟→成都</span>
+        <span><i style="background:var(--day-5)"></i>10/6 成都→香港</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="bookings">
+    <h2 class="section-title">已确认 / 待确认</h2>
+
+    <div class="card">
+      <div class="title-line"><strong>✈️ 去程 HX452</strong><span class="pill" style="background:transparent;color:var(--ink-soft)">香港航空</span></div>
+      <div class="row"><span class="k">10月2日 17:10</span><span>香港国际机场 T2 起飞</span></div>
+      <div class="row"><span class="k">10月2日 20:00</span><span>成都双流国际机场 T1 到达</span></div>
+      <a class="locbtn" data-loc="香港国际机场" href="#">📍 导航去机场</a>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>✈️ 回程 HX453</strong><span class="pill" style="background:transparent;color:var(--ink-soft)">香港航空</span></div>
+      <div class="row"><span class="k">10月6日 21:00</span><span>成都双流国际机场 T1 起飞</span></div>
+      <div class="row"><span class="k">10月6日 23:45</span><span>香港国际机场 到达</span></div>
+      <a class="locbtn" data-loc="成都双流国际机场T1" href="#">📍 导航去机场</a>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🏨 龙之梦雅仕商务酒店（成都东站）</strong><span class="pill">10/2 入住</span></div>
+      <div class="pending">地址 / 电话：待补充 — 发送订单截图后更新</div>
+      <a class="locbtn" data-loc="龙之梦雅仕商务酒店 成都东站" href="#">📍 唤起导航</a>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🏨 泊梵 · 影院民宿（九寨沟）</strong><span class="pill">10/3–10/4 两晚</span></div>
+      <div class="pending">地址 / 电话：待补充 — 发送订单截图后更新</div>
+      <a class="locbtn" data-loc="泊梵 影院民宿 九寨沟" href="#">📍 唤起导航</a>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🏨 如家酒店NEO（成都宽窄巷子抚琴夜市店）</strong><span class="pill">10/5 入住</span></div>
+      <div class="pending">地址 / 电话：待补充 — 发送订单截图后更新</div>
+      <a class="locbtn" data-loc="如家酒店NEO 成都宽窄巷子抚琴夜市店" href="#">📍 唤起导航</a>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🎫 九寨沟景区门票（10/3、10/4 两日）</strong><span class="pill">尚未购买</span></div>
+      <div class="pending">实名预约制，需在官方渠道预约，当日一次有效不可重入</div>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🚄 高铁 成都东 ⇄ 黄龙九寨</strong><span class="pill">尚未购买</span></div>
+      <div class="pending">去程 9月18日起可购票 · 回程 9月20日起可购票（预售期15天）</div>
+    </div>
+
+    <div class="card">
+      <div class="title-line"><strong>🚌 接驳车 黄龙九寨站 ⇄ 九寨沟景区</strong><span class="pill">尚未预订</span></div>
+      <div class="pending">预计9月下旬开放10月车次预订，往返均需单独订票</div>
+    </div>
+  </section>
+
+  <section id="itinerary">
+    <h2 class="section-title">逐日行程 <span class="muted" style="font-weight:400;">— 点击展开当日路线；带「需提前订」标签的项目要抓紧办</span></h2>
+    <div id="days"></div>
+  </section>
+
+  <section id="todo">
+    <h2 class="section-title">待办清单</h2>
+    <div class="card" style="padding:4px 18px;">
+      <ul class="plain" id="todoList"></ul>
+    </div>
+  </section>
+
+  <section id="tips">
+    <h2 class="section-title">实用贴士</h2>
+    <div class="card" style="padding:4px 18px;">
+      <ul class="plain">
+        <li>九寨沟为实名预约制景区，门票当日一次有效、出园不可再入，随身带好身份证件。</li>
+        <li>沟口海拔约2000米，部分栈道上探到3000米以上，如有轻微不适放慢步速即可，不必过度紧张。</li>
+        <li>10月初景区早晚温差大，建议带一件薄羽绒或抓绒外套。</li>
+        <li>国庆黄金周客流量大，观光车、栈道热门点位可能排队，建议开园即入园。</li>
+        <li>香港—成都虽是国内航线，仍需查验证件与过关，机场预留时间不要压得太紧。</li>
+        <li>高铁票、接驳车票在黄金周期间非常紧张，务必按上方"待办清单"的时间点去抢，不要拖到出发前几天。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>成都 · 九寨沟 五日行程手册</footer>
+</div>
+
+<script>
+(function(){
+  // ---------- 数据 ----------
+  var days = [
+    { date:"10月2日 周五", color:"var(--day-1)", title:"香港 → 成都", events:[
+      {t:"14:30", iso:"2026-10-02T14:30:00+08:00", text:"从住处出发前往香港国际机场"},
+      {t:"17:10", iso:"2026-10-02T17:10:00+08:00", text:"HX452 香港国际机场T2 起飞", loc:"香港国际机场", key:true},
+      {t:"20:00", iso:"2026-10-02T20:00:00+08:00", text:"抵达成都双流国际机场 T1", loc:"成都双流国际机场T1", key:true},
+      {t:"22:00", iso:"2026-10-02T22:00:00+08:00", text:"抵达酒店办理入住：龙之梦雅仕商务酒店（成都东站）", loc:"龙之梦雅仕商务酒店 成都东站", note:"预估：过关+取行李+车程约2小时，国庆客流大预留余量"},
+      {t:"22:20", iso:"2026-10-02T22:20:00+08:00", text:"附近觅食或叫外卖"}
+    ]},
+    { date:"10月3日 周六", color:"var(--day-2)", title:"成都 → 黄龙九寨 → 九寨沟", events:[
+      {t:"上午", iso:"2026-10-03T09:00:00+08:00", text:"自由活动，酒店附近觅食或休息"},
+      {t:"10:30", iso:"2026-10-03T10:30:00+08:00", text:"前往成都东站", loc:"成都东站"},
+      {t:"11:15", iso:"2026-10-03T11:15:00+08:00", text:"高铁 成都东 → 黄龙九寨站（预估车次，以实际购票为准）", loc:"成都东站", book:true, note:"9月18日起可购票，建议设起售提醒"},
+      {t:"13:00", iso:"2026-10-03T13:00:00+08:00", text:"抵达黄龙九寨站，换乘接驳车前往九寨沟", loc:"黄龙九寨站", book:true, note:"接驳车预计9月下旬开放预订，记得订往返"},
+      {t:"15:00", iso:"2026-10-03T15:00:00+08:00", text:"抵达九寨沟，办理入住：泊梵·影院民宿", loc:"泊梵 影院民宿 九寨沟"},
+      {t:"15:30", iso:"2026-10-03T15:30:00+08:00", text:"沟口附近逛逛"}
+    ]},
+    { date:"10月4日 周日", color:"var(--day-3)", title:"九寨沟 · 全天游览", events:[
+      {t:"9:00", iso:"2026-10-04T09:00:00+08:00", text:"行李寄存游客中心，附近嗦粉", loc:"九寨沟游客中心"},
+      {t:"10:30", iso:"2026-10-04T10:30:00+08:00", text:"入园游览（轻松安排，无固定打卡点）", loc:"九寨沟风景名胜区", book:true, note:"实名预约门票，当日一次有效不可重入"},
+      {t:"16:00", iso:"2026-10-04T16:00:00+08:00", text:"返回民宿", loc:"泊梵 影院民宿 九寨沟"}
+    ]},
+    { date:"10月5日 周一", color:"var(--day-4)", title:"九寨沟 → 黄龙九寨 → 成都", events:[
+      {t:"9:00", iso:"2026-10-05T09:00:00+08:00", text:"补充打卡剩余景点", loc:"九寨沟风景名胜区"},
+      {t:"13:00", iso:"2026-10-05T13:00:00+08:00", text:"出景区", loc:"九寨沟风景名胜区", key:true},
+      {t:"13:30", iso:"2026-10-05T13:30:00+08:00", text:"午饭，取回寄存行李", loc:"九寨沟游客中心"},
+      {t:"14:00", iso:"2026-10-05T14:00:00+08:00", text:"乘接驳车前往黄龙九寨站（建议不晚于14:00出发）", loc:"九寨沟风景名胜区", book:true, note:"比原计划提前出发，为赶高铁留缓冲"},
+      {t:"16:00", iso:"2026-10-05T16:00:00+08:00", text:"抵达黄龙九寨站", loc:"黄龙九寨站"},
+      {t:"19:51", iso:"2026-10-05T19:51:00+08:00", text:"高铁抵达成都东站（预估车次，以实际购票为准）", loc:"成都东站", book:true, note:"9月20日起可购票", key:true},
+      {t:"20:00", iso:"2026-10-05T20:00:00+08:00", text:"入住 如家酒店NEO（成都宽窄巷子抚琴夜市店）", loc:"如家酒店NEO 成都宽窄巷子抚琴夜市店"},
+      {t:"20:30", iso:"2026-10-05T20:30:00+08:00", text:"出门觅食，夜游宽窄巷子", loc:"宽窄巷子"}
+    ]},
+    { date:"10月6日 周二", color:"var(--day-5)", title:"成都 → 香港", events:[
+      {t:"自由", iso:"2026-10-06T08:00:00+08:00", text:"睡到自然醒，自由活动"},
+      {t:"18:30", iso:"2026-10-06T18:30:00+08:00", text:"前往双流机场", loc:"成都双流国际机场T1"},
+      {t:"19:00", iso:"2026-10-06T19:00:00+08:00", text:"抵达机场", loc:"成都双流国际机场T1"},
+      {t:"21:00", iso:"2026-10-06T21:00:00+08:00", text:"HX453 起飞返回香港", loc:"成都双流国际机场T1", key:true},
+      {t:"23:45", iso:"2026-10-06T23:45:00+08:00", text:"抵达香港国际机场", loc:"香港国际机场", key:true}
+    ]}
+  ];
+
+  var todo = [
+    {when:"尽快", text:"预约购买九寨沟门票（10/3、10/4 两天，官方渠道办理）"},
+    {when:"9/18", text:"抢购 10/3 成都东 → 黄龙九寨 高铁票"},
+    {when:"9/20", text:"抢购 10/5 黄龙九寨 → 成都东 高铁票"},
+    {when:"9/25前后", text:"预订黄龙九寨站⇄九寨沟景区往返接驳车票（去程+回程都要订）"},
+    {when:"随时", text:"发送三家酒店的订单截图，补充页面上的地址与电话"},
+    {when:"待确认", text:"确认是否采用「黄龙九寨站」换乘方案；若维持「松潘站」需告知，行程时间要相应调整"}
+  ];
+
+  // ---------- 渲染逐日行程 ----------
+  var daysEl = document.getElementById("days");
+  days.forEach(function(day, di){
+    var card = document.createElement("div");
+    card.className = "day-card";
+    card.style.setProperty("--dc", day.color);
+
+    var head = document.createElement("div");
+    head.className = "day-head";
+    head.innerHTML =
+      '<div class="d-left"><span class="d-num">DAY '+(di+1)+'</span>' +
+      '<div><div class="d-date">'+day.date+'</div><div class="d-title">'+day.title+'</div></div></div>' +
+      '<span class="chev">▾</span>';
+    card.appendChild(head);
+
+    var route = document.createElement("div");
+    route.className = "day-route";
+    var stopNames = day.events.filter(function(e){return e.loc;}).map(function(e){return e.loc;});
+    var uniqueStops = stopNames.filter(function(v,i){return stopNames.indexOf(v)===i;});
+    var rlist = document.createElement("div");
+    rlist.className = "rlist";
+    rlist.textContent = "当日途经：" + (uniqueStops.length ? uniqueStops.join(" → ") : "无固定地点");
+    route.appendChild(rlist);
+    if(uniqueStops.length > 1){
+      var navA = document.createElement("a");
+      navA.className = "navbtn";
+      navA.href = buildMultiNav(uniqueStops);
+      navA.target = "_blank"; navA.rel = "noopener";
+      navA.textContent = "一键导航全天路线";
+      route.appendChild(navA);
+    }
+    card.appendChild(route);
+
+    head.addEventListener("click", function(){
+      head.classList.toggle("open");
+      route.classList.toggle("open");
+    });
+
+    var evWrap = document.createElement("div");
+    evWrap.className = "events";
+    day.events.forEach(function(e){
+      var ev = document.createElement("div");
+      ev.className = "ev";
+      var locHtml = "";
+      if(e.loc){
+        locHtml = '<div class="loc"><a class="locbtn" data-loc="'+e.loc.replace(/"/g,'&quot;')+'" href="#">📍 导航</a></div>';
+      }
+      var bookHtml = e.book ? ' <span class="pill">需提前订</span>' : '';
+      var noteHtml = e.note ? '<div class="note">'+e.note+'</div>' : '';
+      ev.innerHTML =
+        '<div class="time">'+e.t+'</div>' +
+        '<div class="body">'+e.text+bookHtml+noteHtml+locHtml+'</div>';
+      evWrap.appendChild(ev);
+    });
+    card.appendChild(evWrap);
+
+    daysEl.appendChild(card);
+  });
+
+  // ---------- 待办清单 ----------
+  var todoEl = document.getElementById("todoList");
+  todo.forEach(function(item){
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="when">['+item.when+']</span> '+item.text;
+    todoEl.appendChild(li);
+  });
+
+  // ---------- 地图导航（事件委托） ----------
+  document.addEventListener("click", function(ev){
+    var a = ev.target.closest(".locbtn");
+    if(!a) return;
+    ev.preventDefault();
+    var q = a.getAttribute("data-loc");
+    if(!q) return;
+    window.open("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q), "_blank");
+  });
+
+  function buildMultiNav(stops){
+    var origin = encodeURIComponent(stops[0]);
+    var destination = encodeURIComponent(stops[stops.length-1]);
+    var waypoints = stops.slice(1,-1).map(encodeURIComponent).join("|");
+    var url = "https://www.google.com/maps/dir/?api=1&origin="+origin+"&destination="+destination;
+    if(waypoints) url += "&waypoints="+waypoints;
+    return url;
+  }
+
+  // ---------- 全部关键事件（用于倒计时） ----------
+  var allEvents = [];
+  days.forEach(function(day){
+    day.events.forEach(function(e){
+      allEvents.push({ isoTime:e.iso, text:e.text, loc:e.loc, key:!!e.key });
+    });
+  });
+  allEvents.sort(function(a,b){ return new Date(a.isoTime) - new Date(b.isoTime); });
+
+  function nextEvent(){
+    var now = new Date();
+    var keyed = allEvents.filter(function(e){ return e.key; });
+    var pool = keyed.length ? keyed : allEvents;
+    for(var i=0;i<pool.length;i++){
+      if(new Date(pool[i].isoTime) > now) return pool[i];
+    }
+    return null;
+  }
+
+  function pad(n){ return String(n).padStart(2,"0"); }
+
+  function tickCountdown(){
+    var evt = nextEvent();
+    var card = document.getElementById("nowCard");
+    if(!evt){
+      card.classList.add("done");
+      document.getElementById("nowTitle").textContent = "行程已结束，一路顺风回到家 🎒";
+      document.getElementById("nowCountdown").style.display = "none";
+      document.getElementById("nowMeta").textContent = "";
+      return;
+    }
+    var now = new Date();
+    var diff = Math.max(0, new Date(evt.isoTime) - now);
+    var s = Math.floor(diff/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600); s -= h*3600;
+    var m = Math.floor(s/60); s -= m*60;
+    document.getElementById("nowTitle").textContent = evt.text;
+    document.getElementById("cd-d").textContent = d;
+    document.getElementById("cd-h").textContent = pad(h);
+    document.getElementById("cd-m").textContent = pad(m);
+    document.getElementById("cd-s").textContent = pad(s);
+    var dt = new Date(evt.isoTime);
+    var metaTxt = "目标时间：" + dt.toLocaleString("zh-CN", {timeZone:"Asia/Shanghai", month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit"}) + " 北京时间";
+    document.getElementById("nowMeta").innerHTML = metaTxt + (evt.loc ? ' · <a href="#" class="locbtn" data-loc="'+evt.loc.replace(/"/g,'&quot;')+'" style="color:inherit;text-decoration:underline;">查看位置</a>' : "");
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  // ---------- 白天/黑夜自动配色（按北京时间） ----------
+  function applyTheme(){
+    var hourStr = new Intl.DateTimeFormat("en-US", {timeZone:"Asia/Shanghai", hour:"numeric", hour12:false}).format(new Date());
+    var hour = parseInt(hourStr, 10);
+    var isDay = hour >= 6 && hour < 18;
+    document.documentElement.setAttribute("data-theme", isDay ? "day" : "night");
+  }
+  applyTheme();
+  setInterval(applyTheme, 60000);
+})();
+</script>
+</body>
+</html>
