@@ -6,17 +6,17 @@
 <title>成都·九寨沟 五日行程 · 旅行手册</title>
 <style>
   :root{
-    --day-1:#B5482E; --day-2:#1B6E75; --day-3:#C68A2E; --day-4:#7A4368; --day-5:#3E5C76;
+    --day-1:#FF9478; --day-2:#4FC3E8; --day-3:#FFC94A; --day-4:#B79CF0; --day-5:#4FD9A6;
   }
   html[data-theme="day"]{
-    --bg:#EDEEE2; --surface:#F7F6EC; --surface-2:#E4E4D4; --ink:#20282A; --ink-soft:#586063;
-    --accent:#1B6E75; --accent-ink:#ffffff; --warn:#B5482E; --warn-bg:#F3E2DB; --ok:#3C7A4A; --ok-bg:#DCEBDD; --line:#C9C7B4;
-    --shadow:0 1px 0 rgba(32,40,42,.08);
+    --bg:#F3FBF8; --surface:#FFFFFF; --surface-2:#E6F6F0; --ink:#1F3B36; --ink-soft:#719089;
+    --accent:#1FBFA3; --accent2:#4FC3E8; --accent-ink:#ffffff; --warn:#FF7A59; --warn-bg:#FFECE5; --ok:#22A968; --ok-bg:#E4F7EB; --line:#DFF0EA;
+    --shadow:0 10px 28px rgba(31,59,54,.07);
   }
   html[data-theme="night"]{
-    --bg:#0F1A1C; --surface:#152426; --surface-2:#1B2C2F; --ink:#E7E2D3; --ink-soft:#9FB0AE;
-    --accent:#5FC4BA; --accent-ink:#0F1A1C; --warn:#E08858; --warn-bg:#2A1F1B; --ok:#7FCB8F; --ok-bg:#1B2E20; --line:#2C3E40;
-    --shadow:0 1px 0 rgba(0,0,0,.3);
+    --bg:#0D2430; --surface:#123243; --surface-2:#173C4F; --ink:#E8F6F1; --ink-soft:#8FB7BD;
+    --accent:#52E0C4; --accent2:#63C7EF; --accent-ink:#0D2430; --warn:#FFA98A; --warn-bg:#2C2432; --ok:#7EE3A8; --ok-bg:#153429; --line:#1E4457;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
   }
   *{box-sizing:border-box;}
   body{
@@ -30,62 +30,64 @@
   a{ color:inherit; }
   .muted{ color:var(--ink-soft); }
 
-  header.masthead{ padding:28px 0 18px; }
-  header.masthead .eyebrow{ font-size:13px; color:var(--ink-soft); letter-spacing:.02em; }
-  header.masthead h1{ font-size:26px; margin:6px 0 4px; font-weight:700; }
+  header.masthead{ padding:32px 0 18px; }
+  header.masthead .eyebrow{ font-size:13px; color:var(--accent); letter-spacing:.06em; font-weight:700; }
+  header.masthead h1{ font-size:28px; margin:6px 0 4px; font-weight:700; }
   header.masthead .dates{ font-size:14px; color:var(--ink-soft); }
 
-  section{ margin-top:34px; }
-  h2.section-title{ font-size:15px; font-weight:700; margin:0 0 14px; color:var(--ink-soft); letter-spacing:.01em; }
+  section{ margin-top:36px; }
+  h2.section-title{ font-size:14px; font-weight:700; margin:0 0 14px; color:var(--ink-soft); letter-spacing:.03em; text-transform:uppercase; }
 
   /* ---- 此刻关注 卡片 ---- */
   .now-card{
-    background:var(--accent); color:var(--accent-ink); border-radius:18px; padding:22px 22px 20px;
+    background:linear-gradient(135deg, var(--accent), var(--accent2));
+    color:#ffffff; border-radius:26px; padding:24px 24px 22px;
     box-shadow:var(--shadow);
   }
-  .now-card .label{ font-size:13px; opacity:.85; }
-  .now-card .event-title{ font-size:19px; font-weight:700; margin:4px 0 14px; }
-  .now-card .countdown{ display:flex; gap:14px; }
-  .now-card .unit{ text-align:center; }
-  .now-card .unit .num{ font-size:34px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1; }
-  .now-card .unit .lab{ font-size:11px; opacity:.8; margin-top:4px; }
-  .now-card .meta{ margin-top:16px; font-size:13px; opacity:.9; }
+  .now-card .label{ font-size:13px; opacity:.9; font-weight:600; letter-spacing:.03em; }
+  .now-card .event-title{ font-size:20px; font-weight:700; margin:6px 0 16px; }
+  .now-card .countdown{ display:flex; gap:10px; }
+  .now-card .unit{ text-align:center; background:rgba(255,255,255,.18); border-radius:14px; padding:8px 4px; flex:1; }
+  .now-card .unit .num{ font-size:28px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1; }
+  .now-card .unit .lab{ font-size:11px; opacity:.85; margin-top:4px; }
+  .now-card .meta{ margin-top:16px; font-size:13px; opacity:.95; }
   .now-card .meta a{ text-decoration:underline; }
   .now-card.done{ background:var(--surface-2); color:var(--ink); }
+  .now-card.done .unit{ background:rgba(31,59,54,.06); }
 
   /* ---- 总览地图 ---- */
-  .map-box{ background:var(--surface); border-radius:18px; padding:16px 8px 6px; box-shadow:var(--shadow); }
-  .map-legend{ display:flex; flex-wrap:wrap; gap:10px 16px; padding:10px 14px 14px; font-size:12px; color:var(--ink-soft); }
-  .map-legend span{ display:inline-flex; align-items:center; gap:6px; }
-  .map-legend i{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+  .map-box{ background:var(--surface); border-radius:24px; padding:18px 10px 8px; box-shadow:var(--shadow); }
+  .map-legend{ display:flex; flex-wrap:wrap; gap:8px 14px; padding:12px 12px 14px; font-size:12px; color:var(--ink-soft); }
+  .map-legend span{ display:inline-flex; align-items:center; gap:6px; background:var(--surface-2); padding:4px 10px; border-radius:20px; }
+  .map-legend i{ width:9px; height:9px; border-radius:50%; display:inline-block; }
 
   /* ---- 已确认信息 ---- */
-  .card{ background:var(--surface); border-radius:16px; padding:16px 18px; box-shadow:var(--shadow); margin-bottom:12px; }
+  .card{ background:var(--surface); border-radius:20px; padding:18px 20px; box-shadow:var(--shadow); margin-bottom:14px; }
   .card .row{ display:flex; justify-content:space-between; gap:10px; font-size:14px; margin:3px 0; }
   .card .row .k{ color:var(--ink-soft); flex:none; }
   .card .title-line{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; gap:8px; }
   .card .title-line strong{ font-size:15px; }
-  .pill{ font-size:11px; padding:2px 8px; border-radius:20px; background:var(--warn-bg); color:var(--warn); white-space:nowrap; }
+  .pill{ font-size:11px; padding:3px 10px; border-radius:999px; background:var(--warn-bg); color:var(--warn); white-space:nowrap; font-weight:600; }
   .pill.ok{ background:var(--ok-bg); color:var(--ok); }
-  .locbtn{ display:inline-flex; align-items:center; gap:4px; font-size:13px; color:var(--accent); text-decoration:none; margin-top:6px; }
-  .pending{ font-style:italic; color:var(--ink-soft); font-size:13px; }
-  .urgent{ border:1px solid var(--warn); }
+  .locbtn{ display:inline-flex; align-items:center; gap:4px; font-size:13px; color:var(--accent); text-decoration:none; margin-top:8px; font-weight:600; }
+  .pending{ font-style:normal; color:var(--ink-soft); font-size:13px; }
+  .urgent{ box-shadow:0 0 0 2px var(--warn), var(--shadow); }
 
   /* ---- 逐日行程 ---- */
-  .day-card{ background:var(--surface); border-radius:16px; margin-bottom:14px; box-shadow:var(--shadow); overflow:hidden; border-left:5px solid var(--dc); }
-  .day-head{ display:flex; align-items:center; justify-content:space-between; padding:14px 16px; cursor:pointer; }
-  .day-head .d-left{ display:flex; align-items:baseline; gap:10px; }
-  .day-head .d-num{ font-size:12px; color:var(--dc); font-weight:700; }
+  .day-card{ background:var(--surface); border-radius:22px; margin-bottom:16px; box-shadow:var(--shadow); overflow:hidden; }
+  .day-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; cursor:pointer; gap:10px; }
+  .day-head .d-left{ display:flex; align-items:center; gap:12px; }
+  .day-head .d-num{ font-size:12px; color:#fff; font-weight:700; background:var(--dc); border-radius:999px; padding:5px 11px; }
   .day-head .d-date{ font-size:15px; font-weight:700; }
   .day-head .d-title{ font-size:13px; color:var(--ink-soft); }
   .day-head .chev{ transition:transform .25s ease; color:var(--ink-soft); }
   .day-head.open .chev{ transform:rotate(180deg); }
-  .day-route{ display:none; padding:0 16px 14px; border-top:1px dashed var(--line); }
+  .day-route{ display:none; padding:0 18px 16px; border-top:1px dashed var(--line); }
   .day-route.open{ display:block; }
   .day-route .rlist{ font-size:13px; color:var(--ink-soft); margin:10px 0; }
-  .navbtn{ display:inline-block; font-size:13px; background:var(--accent); color:var(--accent-ink); padding:8px 14px; border-radius:20px; text-decoration:none; margin-top:4px; }
-  .events{ padding:2px 16px 14px; }
-  .ev{ display:flex; gap:12px; padding:9px 0; border-top:1px solid var(--line); }
+  .navbtn{ display:inline-block; font-size:13px; background:var(--dc); color:#fff; padding:9px 16px; border-radius:999px; text-decoration:none; margin-top:4px; font-weight:600; }
+  .events{ padding:2px 18px 16px; }
+  .ev{ display:flex; gap:12px; padding:10px 0; border-top:1px solid var(--line); }
   .ev:first-child{ border-top:none; }
   .ev .time{ flex:none; width:52px; font-size:13px; font-weight:700; color:var(--dc); padding-top:1px; }
   .ev .body{ flex:1; font-size:14px; }
@@ -94,9 +96,9 @@
 
   /* ---- 待办 / 贴士 ---- */
   ul.plain{ list-style:none; margin:0; padding:0; }
-  ul.plain li{ position:relative; padding:10px 0 10px 20px; border-top:1px solid var(--line); font-size:14px; }
+  ul.plain li{ position:relative; padding:11px 0 11px 22px; border-top:1px solid var(--line); font-size:14px; }
   ul.plain li:first-child{ border-top:none; }
-  ul.plain li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
+  ul.plain li::before{ content:"🌱"; position:absolute; left:0; font-size:11px; top:13px; }
   ul.plain li .when{ color:var(--warn); font-weight:700; }
 
   footer{ margin-top:44px; text-align:center; font-size:12px; color:var(--ink-soft); }
@@ -206,14 +208,14 @@
     </div>
 
     <div class="card urgent">
-      <div class="title-line"><strong>🚄 高铁 成都东 ⇄ 松潘</strong><span class="pill">回程尚未购买</span></div>
-      <div class="row"><span class="k">去程 9/29 C5812</span><span class="pill ok">已购票 11:15→13:01</span></div>
+      <div class="title-line"><strong>🚄 高铁 成都东 ⇄ 黄龙九寨</strong><span class="pill">回程尚未购买</span></div>
+      <div class="row"><span class="k">去程 9/29 C5766</span><span class="pill ok">已购票 14:39→16:37</span></div>
       <div class="row"><span class="k">回程 10/1</span><span class="pill">9月17日起可购票</span></div>
-      <div class="pending">10/1是国庆当天，预计是全程最难买的一段，9月17日记得设起售提醒立刻抢</div>
+      <div class="pending">10/1是国庆当天，预计是全程最难买的一段，9月17日记得设起售提醒立刻抢；建议回程也买黄龙九寨站，两头统一</div>
     </div>
 
     <div class="card">
-      <div class="title-line"><strong>🚌 接驳车 松潘站 ⇄ 九寨沟景区</strong><span class="pill">尚未预订</span></div>
+      <div class="title-line"><strong>🚌 接驳车 黄龙九寨站 ⇄ 九寨沟景区</strong><span class="pill">尚未预订</span></div>
       <div class="pending">往返均需单独订票，回程正好落在10/1国庆当天，务必提前锁定</div>
     </div>
   </section>
@@ -258,27 +260,27 @@
       {t:"22:00", iso:"2026-09-28T22:00:00+08:00", text:"抵达酒店办理入住：龙之梦雅仕商务酒店（成都东站）", loc:"龙之梦雅仕商务酒店 成都东站", note:"预估：过关+取行李+车程约2小时，预留余量"},
       {t:"22:20", iso:"2026-09-28T22:20:00+08:00", text:"附近觅食或叫外卖"}
     ]},
-    { date:"9月29日 周二", color:"var(--day-2)", title:"成都 → 松潘 → 九寨沟", events:[
+    { date:"9月29日 周二", color:"var(--day-2)", title:"成都 → 黄龙九寨 → 九寨沟", events:[
       {t:"上午", iso:"2026-09-29T09:00:00+08:00", text:"自由活动，酒店附近觅食或休息"},
-      {t:"10:30", iso:"2026-09-29T10:30:00+08:00", text:"前往成都东站", loc:"成都东站"},
-      {t:"11:15", iso:"2026-09-29T11:15:00+08:00", text:"高铁 C5812 成都东 → 松潘", loc:"成都东站", status:"bought"},
-      {t:"13:01", iso:"2026-09-29T13:01:00+08:00", text:"抵达松潘站，换乘接驳车前往九寨沟", loc:"松潘站", status:"need", note:"接驳车尚未预订，去程+回程都要订"},
-      {t:"15:30", iso:"2026-09-29T15:30:00+08:00", text:"抵达九寨沟，办理入住：悦朵酒店（九寨沟景区店）", loc:"悦朵酒店 九寨沟景区店", note:"大巴车程约2.5小时，预估到达时间"},
-      {t:"15:45", iso:"2026-09-29T15:45:00+08:00", text:"沟口附近逛逛"}
+      {t:"13:30", iso:"2026-09-29T13:30:00+08:00", text:"前往成都东站", loc:"成都东站"},
+      {t:"14:39", iso:"2026-09-29T14:39:00+08:00", text:"高铁 C5766 成都东 → 黄龙九寨", loc:"成都东站", status:"bought"},
+      {t:"16:37", iso:"2026-09-29T16:37:00+08:00", text:"抵达黄龙九寨站，换乘接驳车前往九寨沟", loc:"黄龙九寨站", status:"need", note:"接驳车尚未预订，去程+回程都要订"},
+      {t:"18:30", iso:"2026-09-29T18:30:00+08:00", text:"抵达九寨沟，办理入住：悦朵酒店（九寨沟景区店）", loc:"悦朵酒店 九寨沟景区店", note:"大巴车程约2小时，预估到达时间；这天到得比原计划晚，抵达时天已经黑了"},
+      {t:"18:45", iso:"2026-09-29T18:45:00+08:00", text:"附近简单觅食（时间较晚，不安排久逛）"}
     ]},
     { date:"9月30日 周三", color:"var(--day-3)", title:"九寨沟 · 全天游览", events:[
       {t:"9:00", iso:"2026-09-30T09:00:00+08:00", text:"行李寄存游客中心，附近嗦粉", loc:"九寨沟游客中心"},
       {t:"10:30", iso:"2026-09-30T10:30:00+08:00", text:"入园游览（轻松安排，无固定打卡点）", loc:"九寨沟风景名胜区", status:"need", note:"实名预约门票，当日一次有效不可重入；不在假期内相对好约"},
       {t:"16:00", iso:"2026-09-30T16:00:00+08:00", text:"返回酒店：悦朵酒店（九寨沟景区店）", loc:"悦朵酒店 九寨沟景区店"}
     ]},
-    { date:"10月1日 周四 · 国庆当天", color:"var(--day-4)", title:"九寨沟 → 松潘 → 成都", events:[
+    { date:"10月1日 周四 · 国庆当天", color:"var(--day-4)", title:"九寨沟 → 黄龙九寨 → 成都", events:[
       {t:"9:00", iso:"2026-10-01T09:00:00+08:00", text:"补充打卡剩余景点", loc:"九寨沟风景名胜区", note:"今天是国庆当天，园内会格外拥挤，建议精简路线"},
       {t:"13:00", iso:"2026-10-01T13:00:00+08:00", text:"出景区", loc:"九寨沟风景名胜区", key:true},
       {t:"13:15", iso:"2026-10-01T13:15:00+08:00", text:"午饭，取回寄存行李", loc:"九寨沟游客中心"},
-      {t:"13:30", iso:"2026-10-01T13:30:00+08:00", text:"乘接驳车出发前往松潘站", loc:"九寨沟风景名胜区", status:"need", note:"国庆当天客流最大，别晚于这班车；回程接驳车尚未订，务必提前锁定"},
-      {t:"16:00", iso:"2026-10-01T16:00:00+08:00", text:"抵达松潘站（预估，车程约2.5小时）", loc:"松潘站"},
-      {t:"17:58", iso:"2026-10-01T17:58:00+08:00", text:"高铁从松潘站出发（车次待定）", loc:"松潘站", status:"need", key:true, note:"国庆当天车次，预计非常抢手，9月17日起可购票，一开票就抢"},
-      {t:"19:51", iso:"2026-10-01T19:51:00+08:00", text:"抵达成都东站（预估，以实际购票车次为准）", loc:"成都东站"},
+      {t:"13:30", iso:"2026-10-01T13:30:00+08:00", text:"乘接驳车出发前往黄龙九寨站", loc:"九寨沟风景名胜区", status:"need", note:"国庆当天客流最大，别晚于这班车；回程接驳车尚未订，务必提前锁定"},
+      {t:"15:30", iso:"2026-10-01T15:30:00+08:00", text:"抵达黄龙九寨站（预估，车程约2小时）", loc:"黄龙九寨站"},
+      {t:"18:00", iso:"2026-10-01T18:00:00+08:00", text:"高铁从黄龙九寨站出发（车次待定）", loc:"黄龙九寨站", status:"need", key:true, note:"国庆当天车次，预计非常抢手，9月17日起可购票，一开票就抢；建议买黄龙九寨站，和去程统一"},
+      {t:"19:55", iso:"2026-10-01T19:55:00+08:00", text:"抵达成都东站（预估，以实际购票车次为准）", loc:"成都东站"},
       {t:"20:00", iso:"2026-10-01T20:00:00+08:00", text:"入住 如家精选酒店（成都宽窄巷子抚琴地铁站店）", loc:"如家精选酒店 成都宽窄巷子抚琴地铁站店 金牛区抚琴西路128号"},
       {t:"20:30", iso:"2026-10-01T20:30:00+08:00", text:"出门觅食，夜游宽窄巷子", loc:"宽窄巷子"}
     ]},
@@ -292,9 +294,9 @@
   ];
 
   var todo = [
-    {when:"9月17日", text:"抢购 10/1 松潘 → 成都东 高铁票——国庆当天，预计整趟行程里最难买的一段，务必设起售提醒"},
+    {when:"9月17日", text:"抢购 10/1 黄龙九寨 → 成都东 高铁票——国庆当天，预计整趟行程里最难买的一段，务必设起售提醒"},
     {when:"尽快", text:"预约购买九寨沟门票（9/30、10/1 两天，官方渠道办理）"},
-    {when:"尽快", text:"预订松潘站⇄九寨沟景区接驳车往返车票（9/29去程 + 10/1回程都要订）"},
+    {when:"尽快", text:"预订黄龙九寨站⇄九寨沟景区接驳车往返车票（9/29去程 + 10/1回程都要订）"},
     {when:"随时", text:"发送龙之梦、如家两家酒店的电话号码（截图里没显示，地址已经补上了）"},
     {when:"待办理", text:"办理退香港离境税"}
   ];
@@ -325,9 +327,9 @@
     if(uniqueStops.length > 1){
       var navA = document.createElement("a");
       navA.className = "navbtn";
-      navA.href = buildMultiNav(uniqueStops);
+      navA.href = "https://uri.amap.com/search?keyword=" + encodeURIComponent(uniqueStops[0]);
       navA.target = "_blank"; navA.rel = "noopener";
-      navA.textContent = "一键导航全天路线";
+      navA.textContent = "在高德地图中查看当日第一站";
       route.appendChild(navA);
     }
     card.appendChild(route);
@@ -375,17 +377,8 @@
     ev.preventDefault();
     var q = a.getAttribute("data-loc");
     if(!q) return;
-    window.open("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q), "_blank");
+    window.open("https://uri.amap.com/search?keyword=" + encodeURIComponent(q), "_blank");
   });
-
-  function buildMultiNav(stops){
-    var origin = encodeURIComponent(stops[0]);
-    var destination = encodeURIComponent(stops[stops.length-1]);
-    var waypoints = stops.slice(1,-1).map(encodeURIComponent).join("|");
-    var url = "https://www.google.com/maps/dir/?api=1&origin="+origin+"&destination="+destination;
-    if(waypoints) url += "&waypoints="+waypoints;
-    return url;
-  }
 
   // ---------- 全部关键事件（用于倒计时） ----------
   var allEvents = [];
